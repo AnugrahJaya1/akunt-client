@@ -7,4 +7,5 @@ import 'bootstrap/dist/js/bootstrap.min'
 
 const app = createApp(App)
 app.use(router)
-app.mount('#app')// implementasikan pada element engan id app
+app.mount('#app')
+

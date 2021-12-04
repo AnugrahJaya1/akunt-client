@@ -1,33 +1,26 @@
-import {createRouter, createWebHistory} from 'vue-router'
-// create router url/path untuk akses component
-// createWebHistory aktifkan mode history
+import { createRouter, createWebHistory } from "vue-router";
 
-// kumpulan route
-const routes=[
-    // object
+const routes =[
     {
         path: '/',
         name: 'transaction.index',
-        component : () => import("../views/transaction/Index.vue")
+        component: ()=> import('../views/transactions/Index.vue')
     },
     {
         path: '/create',
         name: 'transaction.create',
-        component : () => import("../views/transaction/Create.vue")
+        component: ()=> import('../views/transactions/Create.vue')
     },
     {
         path: '/edit/:id',
         name: 'transaction.edit',
-        component : () => import("../views/transaction/Edit.vue")
-    },
-];
+        component: ()=> import('../views/transactions/Edit.vue')
+    }
+]
 
-//buat router, object yang membuat route aktif
-const router= createRouter({
+const router = createRouter({
     history: createWebHistory(),
     routes
-});
+})
 
-//akan di import ke main
-//export dulu agar bisa di import
 export default router;
