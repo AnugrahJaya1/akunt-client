@@ -56,9 +56,8 @@ import {ref} from 'vue'
 
 export default {
     setup(){
-        console.log("Setup")
+        // console.log("Setup")
         const transactions = ref([])
-
         const load = async() => {
             try{
                 let data = await fetch('http://localhost:8000/api/transactions')
@@ -67,7 +66,7 @@ export default {
                     throw Error('no data available')
                 }
                 transactions.value = await data.json();
-                console.log(transactions)
+                // console.log(transactions)
             }catch(err){
                 console.log(err.message)
             }
