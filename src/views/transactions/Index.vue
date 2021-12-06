@@ -53,6 +53,7 @@
 
 <script>
 import {ref} from 'vue'
+import axios from 'axios'
 
 export default {
     setup(){
@@ -61,6 +62,11 @@ export default {
         const load = async() => {
             try{
                 let data = await fetch('http://localhost:8000/api/transactions')
+                // const axios = require('axios')
+                // axios.grt('http://localhost:8000/api/transactions')
+                // then((res)=>{
+                //     console.log(res)
+                // })
                 // console.log(data)
                 if(!data.ok){
                     throw Error('no data available')
