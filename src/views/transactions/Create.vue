@@ -19,21 +19,21 @@
                                 <label for="" class="form-label">Title</label>
                                 <input type="text" class="form-control" v-model="transaction.title">
                                 <div v-if="validation.title" class="text-danger">
-                                    {{validation.title}}
+                                    {{validation.title[0]}}
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Amount</label>
                                 <input type="number" class="form-control" v-model="transaction.amount">
                                 <div v-if="validation.amount" class="text-danger">
-                                    {{validation.amount}}
+                                    {{validation.amount[0]}}
                                 </div>
                             </div>
                             <div class="mb-3">
                                 <label for="" class="form-label">Time</label>
                                 <input type="text" class="form-control" placeholder="yyyy-mm-dd hh:mm:ss" v-model="transaction.time">
                                 <div v-if="validation.time" class="text-danger">
-                                    {{validation.time}}
+                                    {{validation.time[0]}}
                                 </div>
                             </div>
                             <div class="mb-3">
@@ -43,7 +43,7 @@
                                     <option value="revenue">Revenue</option>
                                 </select>
                                 <div v-if="validation.type" class="text-danger">
-                                    {{validation.type}}
+                                    {{validation.type[0]}}
                                 </div>
                             </div>
                             <button class="btn btn-outline-primary">Submit</button>
@@ -89,9 +89,13 @@ export default {
                         name: 'transaction.index'
                     })
                 }else{
-                    validation.value = response.json()
-                    console.log(validation.value)
+                    response.json().then((data)=>{
+                        validation.value = data
+                        // console.log(data)
+                    })
+                    // console.log(validation.value)
                 }
+                // console.log(response)
                 
             })
 
