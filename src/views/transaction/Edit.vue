@@ -11,10 +11,10 @@
 
                 <div class="card rounded shadow">
                     <div class="card-header">
-                        Create Transaction
+                        Edit Transaction
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="store()">
+                        <form @submit.prevent="update()">
                             <div class="mb-3">
                                 <label for="" class="form-label">Title</label>
                                 <input type="text" class="form-control" v-model="transaction.title">
@@ -57,27 +57,51 @@
 
 <script>
 import {reactive, ref} from 'vue'
-import {useRouter} from 'vue-router'
-import axios from 'axios'
-
+import {useRouter, useRoute} from 'vue-router'
 export default {
     setup(){
         // data binding
-        const transaction = reactive({
+        let transaction = reactive({
             title: '',
             amount: '',
             time: '',
             type: '',
         });
 
+        
         const validation = ref([]);
 
         const router = useRouter();
+        const route = useRoute();
+
+        function load(){
+                fetch(`http://localhost:8000/api/transactions/${route.params.id}`,{
+                    method: 'GET'
+                }).then((respone)=>{
+                    if(respone.ok){
+                        respone.json().then((data)=>{
+                            transaction.title = data.data.title
+                            transaction.amount = data.data.amount
+                            transaction.time = data.data.time
+                            transaction.type = data.data.type
+                            // console.log(transaction.title)
+                        })
+                    }else{
+                        response.json().then((data)=>{
+                            validation.value = data
+                            // console.log(data)
+                        })
+                    }
+                })
+        }
+
+        load()
+
 
         // req ke api
-        function store(){
-            fetch('http://localhost:8000/api/transactions',{
-                method: 'post',
+        function update(){
+            fetch(`http://localhost:8000/api/transactions/${route.params.id}`,{
+                method: 'put',
                 headers:{
                     'Content-Type': 'application/json'
                 },
@@ -117,7 +141,7 @@ export default {
             transaction,
             validation,
             router,
-            store
+            update
         }
     }
 }

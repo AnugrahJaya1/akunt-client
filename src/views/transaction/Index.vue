@@ -53,31 +53,22 @@
 
 <script>
 import {ref} from 'vue'
-import axios from 'axios'
 
 export default {
     setup(){
         // console.log("Setup")
         const transactions = ref([])
-        const load = async() => {
-            try{
-                let data = await fetch('http://localhost:8000/api/transactions')
-                // const axios = require('axios')
-                // axios.grt('http://localhost:8000/api/transactions')
-                // then((res)=>{
-                //     console.log(res)
-                // })
-                // console.log(data)
-                if(!data.ok){
-                    throw Error('no data available')
+        function load(){
+            fetch('http://localhost:8000/api/transactions',{
+                method: 'GET'
+            }).then((response)=>{
+                if(response.ok){
+                    response.json().then((data)=>{
+                        transactions.value = data
+                    })
                 }
-                transactions.value = await data.json();
-                // console.log(transactions)
-            }catch(err){
-                console.log(err.message)
-            }
+            })    
         }
-
         load()
 
         // untuk bisa pake harus di return terlebih dahulu

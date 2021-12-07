@@ -4,17 +4,17 @@ const routes =[
     {
         path: '/',
         name: 'transaction.index',
-        component: ()=> import('../views/transactions/Index.vue')
+        component: ()=> import('../views/transaction/Index.vue')
     },
     {
         path: '/create',
         name: 'transaction.create',
-        component: ()=> import('../views/transactions/Create.vue')
+        component: ()=> import('../views/transaction/Create.vue')
     },
     {
         path: '/edit/:id',
         name: 'transaction.edit',
-        component: ()=> import('../views/transactions/Edit.vue')
+        component: ()=> import('../views/transaction/Edit.vue')
     }
 ]
 
