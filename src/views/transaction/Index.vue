@@ -36,7 +36,7 @@
                                             >
                                             Edit
                                             </router-link>
-                                            <button class="btn btn-sm btn-outline-danger">
+                                            <button class="btn btn-sm btn-outline-danger" @click.prevent="destroy(transaction.id, index)">
                                                 Delete
                                             </button>
                                         </div>
@@ -71,9 +71,26 @@ export default {
         }
         load()
 
+        function destroy(id, index){
+            fetch(`http://localhost:8000/api/transactions/${id}`,{
+                method: 'delete',
+            }).then((response)=>{
+                if(response.ok){
+                    // berhasil
+                    transactions.value.data.splice(index, 1)
+                }else{
+                    response.json().then((data)=>{
+                        console.log(data)
+                    })
+                }
+                
+            })
+        }
+
         // untuk bisa pake harus di return terlebih dahulu
         return{
-            transactions
+            transactions,
+            destroy
         }
         
     }
