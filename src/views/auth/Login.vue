@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body">
                         <div v-if="validation.message" class="text-danger">
-                            {{form.email + " is " +validation.message}}
+                            {{"Wrong email or password"}}
                         </div>
                         <form @submit.prevent="login()">
                             <div class="mb-3">
