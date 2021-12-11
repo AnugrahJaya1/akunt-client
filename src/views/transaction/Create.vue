@@ -62,6 +62,7 @@ import {useRouter} from 'vue-router'
 export default {
     setup(){
         let user = JSON.parse(localStorage.getItem('user'));
+        console.log(user)
         // data binding
         const transaction = reactive({
             title: '',
@@ -87,7 +88,7 @@ export default {
                 if(response.ok){
                     // berhasil
                     router.push({
-                        name: 'transaction.index'
+                        name: 'transaction.home'
                     })
                 }else{
                     response.json().then((data)=>{
