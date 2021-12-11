@@ -3,8 +3,13 @@ import { createRouter, createWebHistory } from "vue-router";
 const routes =[
     {
         path: '/',
-        name: 'transaction.index',
-        component: ()=> import('../views/transaction/Index.vue')
+        name: 'index',
+        component: ()=> import('../views/auth/Login.vue')
+    },
+    {
+        path: '/home',
+        name: 'transaction.home',
+        component: ()=> import('../views/transaction/Home.vue')
     },
     {
         path: '/create',

@@ -56,11 +56,14 @@ import {ref} from 'vue'
 
 export default {
     setup(){
-        // console.log("Setup")
+        let user = JSON.parse(localStorage.getItem('user'));
         const transactions = ref([])
         function load(){
             fetch('http://localhost:8000/api/transactions',{
-                method: 'GET'
+                method: 'GET',
+                headers:{
+                    'Authorization': 'Bearer ' + user.token,
+                },
             }).then((response)=>{
                 if(response.ok){
                     response.json().then((data)=>{
@@ -74,6 +77,9 @@ export default {
         function destroy(id, index){
             fetch(`http://localhost:8000/api/transactions/${id}`,{
                 method: 'delete',
+                headers:{
+                    'Authorization': 'Bearer ' + user.token,
+                },
             }).then((response)=>{
                 if(response.ok){
                     // berhasil

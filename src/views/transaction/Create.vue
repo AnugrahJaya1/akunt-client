@@ -3,7 +3,7 @@
         <div class="row justify-content-center">
             <div class="col-8">
                 <router-link
-                :to="{name: 'transaction.index'}"
+                :to="{name: 'transaction.home'}"
                 class="btn btn-primary btn-sm rounded shadow mb-3"
                 >
                 Back
@@ -61,6 +61,7 @@ import {useRouter} from 'vue-router'
 
 export default {
     setup(){
+        let user = JSON.parse(localStorage.getItem('user'));
         // data binding
         const transaction = reactive({
             title: '',
@@ -78,7 +79,8 @@ export default {
             fetch('http://localhost:8000/api/transactions',{
                 method: 'post',
                 headers:{
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + user.token,
                 },
                 body: JSON.stringify(transaction)
             }).then((response)=>{
